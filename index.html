@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heritage Barber Co. — Est. 1962 | Classic Cuts &amp; Shaves</title>
+<meta name="description" content="Heritage Barber Co. has been cutting hair in this neighborhood since 1962. Walk-ins welcome, no appointment necessary.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- All serif: Playfair Display (headings) + Lora (body). Zero sans. -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   HERITAGE BARBER CO. — Est. 1962
+   Single-file demo. Swap all copy, phone, address, hours freely.
+
+   Palette  : navy   #1c3354  · cream  #f4efe5  · red  #b82e28
+   Type     : Playfair Display (headings, shop name)
+              Lora (body, prices, labels) — ALL SERIF, no sans.
+   Signature: CSS barber pole stripes (red / white / navy)
+              run as 14px horizontal bands between every section,
+              AND as 22px vertical side columns framing the hero
+              on desktop — like the poles that flank the doorway.
+   No JavaScript. No scroll animations. Loads instantly.
+   ============================================================ */
+
+:root {
+  --navy:    #1c3354;
+  --navy-d:  #132438;
+  --navy-l:  #254878;
+  --cream:   #f4efe5;
+  --cream-d: #e0d8c5;
+  --red:     #b82e28;
+  --red-d:   #8d2320;
+  --ink:     #2a2015;   /* warm near-black for body on cream  */
+  --ink-m:   #6b5f4c;   /* warm muted for secondary on cream  */
+  --maxw:    960px;
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html  { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body  {
+  background: var(--cream);
+  color: var(--ink);
+  /* All body type is serif — appropriate for printed shop-card feel */
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a   { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ---------- layout ---------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 26px;
+}
+
+/* ---------- shared type ---------- */
+.display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+.eyebrow {
+  font-family: "Lora", serif;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.sec-h {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.8rem, 5.5vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* Subtle paper texture on cream sections —
+   faint ruled lines at 3–4% opacity, like old ledger paper. */
+.paper {
+  background-color: var(--cream);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 27px,
+      rgba(42,32,21,.038) 27px,
+      rgba(42,32,21,.038) 28px
+    );
+}
+
+/* ============================================================
+   THE SIGNATURE ELEMENT — Barber pole stripe.
+
+   The repeating red / white / navy diagonal stripe runs as:
+   1. Horizontal 14px bands between every section of the page.
+   2. Vertical 22px side columns inside the hero (desktop only),
+      exactly as barber poles flank a shop's entrance.
+   ============================================================ */
+.pole {
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--red)   0 8px,
+    #fff         8px 15px,
+    var(--navy)  15px 23px,
+    #fff         23px 30px
+  );
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--navy);
+  border-bottom: 3px solid var(--navy-d);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 26px;
+}
+.topbar .tb-brand {
+  font-family: "Playfair Display", serif;
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: .06em;
+}
+.topbar .tb-phone {
+  font-family: "Lora", serif;
+  font-size: .86rem;
+  color: var(--cream-d);
+  transition: color .18s ease;
+}
+.topbar .tb-phone:hover { color: var(--cream); }
+.topbar .tb-phone::before {
+  content: "☎  ";
+  font-size: .7em;
+  opacity: .7;
+}
+
+/* ============================================================
+   1 · HERO
+   ============================================================ */
+.hero {
+  background: var(--navy);
+  text-align: center;
+  padding: 72px 26px 84px;
+  position: relative;  /* needed for ::before / ::after side poles */
+  overflow: hidden;
+}
+
+/* Barber pole side columns — desktop only, ≥ 580px */
+@media (min-width: 580px) {
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 22px;
+    /* Horizontal color bands going down: looks like a barber pole column */
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--red)    0 14px,
+      #fff          14px 20px,
+      var(--navy-d) 20px 34px,
+      #fff          34px 40px
+    );
+  }
+  .hero::before { left: 0; }
+  .hero::after  { right: 0; }
+  /* Push content clear of the side poles */
+  .hero .wrap   { padding-left: 48px; padding-right: 48px; }
+}
+
+/* "Est. 1962" circular stamp/seal */
+.est-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 88px; height: 88px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  margin: 0 auto 30px;
+  position: relative;
+  gap: 1px;
+}
+.est-badge::after {
+  content: "";
+  position: absolute; inset: 5px;
+  border: 1px solid rgba(184,46,40,.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.est-badge .eb-top {
+  font-family: "Lora", serif;
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(244,239,229,.55);
+  line-height: 1;
+}
+.est-badge .eb-year {
+  font-family: "Playfair Display", serif;
+  font-size: 1.48rem;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+}
+.est-badge .eb-bot {
+  font-family: "Lora", serif;
+  font-size: .48rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(244,239,229,.4);
+  line-height: 1;
+}
+
+/* Shop name */
+.hero .shop-name {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 11vw, 6.2rem);
+  font-weight: 900;
+  line-height: .96;
+  color: var(--cream);
+  letter-spacing: -.01em;
+  margin-bottom: 8px;
+}
+.hero .shop-name .co {
+  display: block;
+  font-size: .52em;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: .12em;
+  color: rgba(244,239,229,.65);
+}
+
+/* Ornamental divider between name and tagline */
+.hero .orn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px auto;
+  max-width: 280px;
+}
+.hero .orn::before,
+.hero .orn::after {
+  content: "";
+  flex: 1; height: 1px;
+  background: rgba(255,255,255,.18);
+}
+.hero .orn .glyph { color: var(--red); font-size: 1rem; line-height: 1; }
+
+.hero .tagline {
+  font-family: "Lora", serif;
+  font-size: clamp(.96rem, 3.4vw, 1.22rem);
+  font-style: italic;
+  color: rgba(244,239,229,.72);
+  max-width: 34ch;
+  margin: 0 auto 38px;
+  line-height: 1.72;
+}
+
+/* Buttons */
+.hero .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.btn-fill {
+  display: inline-block;
+  font-family: "Lora", serif;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  padding: 14px 32px;
+  background: var(--cream);
+  color: var(--navy);
+  border: 2px solid var(--cream);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-fill:hover { background: var(--red); color: var(--cream); border-color: var(--red); }
+.btn-fill:focus-visible { outline-color: var(--cream); }
+
+.btn-ghost-c {
+  display: inline-block;
+  font-family: "Lora", serif;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--cream);
+  border: 2px solid rgba(244,239,229,.38);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.btn-ghost-c:hover { border-color: var(--cream); background: rgba(244,239,229,.08); }
+
+.hero .hero-note {
+  font-size: .76rem;
+  font-style: italic;
+  color: rgba(244,239,229,.38);
+  letter-spacing: .06em;
+}
+
+/* ============================================================
+   2 · SERVICES
+   ============================================================ */
+.services {
+  padding: 86px 0 78px;
+}
+
+.services .sec-head {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.services .sec-head .sec-h { color: var(--navy); margin-top: 8px; }
+
+/* Framed price card — looks like a hand-lettered menu on the wall */
+.menu-frame {
+  border: 2px solid var(--navy);
+  padding: 10px;    /* gap between outer and inner border */
+}
+.menu-frame .menu-inner {
+  border: 1px solid var(--navy);
+  padding: 34px 28px;
+}
+
+.menu-frame .mf-top {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--cream-d);
+  margin-bottom: 6px;
+}
+.menu-frame .mf-top .mf-glyph {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--red);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.menu-frame .mf-top p {
+  font-size: .8rem;
+  font-style: italic;
+  color: var(--ink-m);
+  letter-spacing: .04em;
+}
+
+/* Each service row */
+.svc-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--cream-d);
+}
+/* Last row: remove bottom border so it doesn't double with mf-foot top border */
+.svc-row.last { border-bottom: none; }
+
+.svc-row .sr-l  { flex: 1 1 auto; }
+.svc-row .sr-name {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.05rem, 3.8vw, 1.32rem);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.svc-row .sr-desc {
+  font-family: "Lora", serif;
+  font-size: .84rem;
+  font-style: italic;
+  color: var(--ink-m);
+  line-height: 1.5;
+  max-width: 42ch;
+}
+.svc-row .sr-price {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.3rem, 4.5vw, 1.75rem);
+  font-weight: 800;
+  color: var(--red);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.menu-frame .mf-foot {
+  text-align: center;
+  padding-top: 18px;
+  border-top: 1px solid var(--cream-d);
+  margin-top: 6px;
+}
+.menu-frame .mf-foot p {
+  font-size: .78rem;
+  font-style: italic;
+  color: var(--ink-m);
+}
+
+.services .svc-cta {
+  text-align: center;
+  margin-top: 42px;
+}
+.btn-navy {
+  display: inline-block;
+  font-family: "Lora", serif;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  padding: 14px 36px;
+  background: var(--navy);
+  color: var(--cream);
+  border: 2px solid var(--navy);
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.btn-navy:hover { background: var(--navy-d); border-color: var(--navy-d); }
+
+/* ============================================================
+   3 · OUR STORY
+   ============================================================ */
+.story {
+  background: var(--navy);
+  padding: 86px 0;
+}
+
+.story .story-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.story .eyebrow { color: var(--red); }
+.story .sec-h { color: var(--cream); margin-top: 8px; }
+
+.story .orn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px auto;
+  max-width: 240px;
+}
+.story .orn::before,
+.story .orn::after {
+  content: "";
+  flex: 1; height: 1px;
+  background: rgba(255,255,255,.16);
+}
+.story .orn .glyph { color: var(--red); font-size: 1.1rem; line-height: 1; }
+
+.story .body-copy {
+  text-align: left;
+  color: rgba(244,239,229,.78);
+  font-size: 1.02rem;
+  line-height: 1.92;
+}
+.story .body-copy p + p { margin-top: 18px; }
+.story .body-copy strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.story .closing-line {
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.05rem, 3.5vw, 1.4rem);
+  font-style: italic;
+  font-weight: 700;
+  color: rgba(244,239,229,.52);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   4 · GALLERY
+   ============================================================ */
+.gallery {
+  padding: 86px 0;
+}
+
+.gallery .sec-head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+.gallery .sec-head .sec-h { color: var(--navy); margin-top: 8px; }
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.gph {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--cream-d);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow: hidden;
+  /* Warm diagonal hatching — feels like old-paper stock photography texture */
+  background:
+    linear-gradient(145deg, rgba(28,51,84,.1), rgba(42,32,21,.06)),
+    repeating-linear-gradient(
+      130deg,
+      #ece7dd 0 14px,
+      #e6e0d4 14px 28px
+    );
+}
+.gph::before {
+  content: "";
+  position: absolute; inset: 8px;
+  border: 1px solid rgba(42,32,21,.1);
+  pointer-events: none;
+}
+.gph .gph-icon {
+  font-size: 1.4rem;
+  opacity: .3;
+  color: var(--navy);
+  line-height: 1;
+}
+.gph .gph-label {
+  font-family: "Lora", serif;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--ink-m);
+  opacity: .7;
+}
+.gph .gph-sub {
+  font-family: "Lora", serif;
+  font-size: .72rem;
+  font-style: italic;
+  color: var(--ink-m);
+  opacity: .55;
+  text-align: center;
+  padding: 0 10px;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   5 · HOURS & LOCATION
+   ============================================================ */
+.visit {
+  background: var(--navy);
+  padding: 86px 0;
+}
+
+.visit .sec-head {
+  text-align: center;
+  margin-bottom: 54px;
+}
+.visit .eyebrow { color: var(--red); }
+.visit .sec-h { color: var(--cream); margin-top: 8px; }
+
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Shared block label */
+.blk-lbl {
+  font-family: "Playfair Display", serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--cream);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  margin-bottom: 18px;
+  display: block;
+}
+
+/* Hours table */
+.htbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+.htbl tr { border-bottom: 1px solid rgba(255,255,255,.07); }
+.htbl td {
+  padding: 12px 4px;
+  font-size: .92rem;
+  color: rgba(244,239,229,.75);
+  vertical-align: middle;
+}
+.htbl td:last-child { text-align: right; }
+.htbl td:first-child { padding-right: 16px; }
+.htbl tr.closed td { opacity: .42; font-style: italic; }
+
+.hours-note {
+  margin-top: 14px;
+  font-size: .78rem;
+  font-style: italic;
+  color: rgba(244,239,229,.38);
+}
+
+/* Contact info */
+.contact-blk .big-phone {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-weight: 900;
+  color: var(--cream);
+  letter-spacing: .02em;
+  margin: 14px 0 6px;
+  line-height: 1;
+  transition: color .18s ease;
+}
+.contact-blk .big-phone:hover { color: var(--red); }
+.contact-blk .addr {
+  font-size: .94rem;
+  color: rgba(244,239,229,.7);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.contact-blk .walk-badge {
+  display: inline-block;
+  border: 1px solid rgba(184,46,40,.45);
+  padding: 8px 16px;
+  font-size: .74rem;
+  font-style: italic;
+  letter-spacing: .06em;
+  color: rgba(184,46,40,.85);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--navy-d);
+  padding: 52px 0 30px;
+  text-align: center;
+}
+.footer .f-name {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 900;
+  color: var(--cream);
+  letter-spacing: .04em;
+}
+.footer .f-sub {
+  font-family: "Lora", serif;
+  font-size: .72rem;
+  font-style: italic;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(244,239,229,.36);
+  margin-top: 6px;
+}
+.footer .f-rule {
+  width: 56px; height: 1px;
+  background: rgba(255,255,255,.1);
+  margin: 22px auto;
+}
+.footer .f-info {
+  font-size: .86rem;
+  color: rgba(244,239,229,.46);
+  line-height: 1.9;
+}
+.footer .f-info a { transition: color .18s ease; }
+.footer .f-info a:hover { color: var(--cream); }
+.footer .f-copy {
+  margin-top: 26px;
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(244,239,229,.22);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 620px) {
+  .visit-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 760px) {
+  .menu-inner { padding: 42px 42px; }
+}
+@media (min-width: 900px) {
+  .wrap  { padding: 0 40px; }
+  .topbar { padding: 16px 40px; }
+  .hero   { padding: 80px 40px 90px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<header class="topbar">
+  <span class="tb-brand display">Heritage Barber Co.</span>
+  <a class="tb-phone" href="tel:+15554012962">(555) 401-2962</a>
+</header>
+
+<!-- Pole stripe between topbar and hero -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== 1 · HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+
+    <div class="est-badge" aria-label="Established 1962">
+      <span class="eb-top">Est.</span>
+      <span class="eb-year display">1962</span>
+      <span class="eb-bot">Since</span>
+    </div>
+
+    <h1 class="shop-name">
+      Heritage
+      <span class="co">Barber Co.</span>
+    </h1>
+
+    <div class="orn" aria-hidden="true">
+      <span class="glyph">✦</span>
+    </div>
+
+    <p class="tagline">
+      Honest cuts, close shaves, and the same<br>good conversation since 1962.
+    </p>
+
+    <div class="btn-row">
+      <a href="#visit" class="btn-fill">Walk-Ins Welcome</a>
+      <a href="tel:+15554012962" class="btn-ghost-c">Call to Book</a>
+    </div>
+
+    <p class="hero-note">No appointment necessary &nbsp;·&nbsp; Open six days a week</p>
+
+  </div>
+</section>
+
+<!-- Pole stripe between hero and services -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== 2 · SERVICES ===== -->
+<section class="services paper">
+  <div class="wrap">
+
+    <div class="sec-head">
+      <p class="eyebrow">What We Do</p>
+      <h2 class="sec-h display">Services &amp; Prices</h2>
+    </div>
+
+    <!-- Double-bordered frame card — like a sign on the shop wall -->
+    <div class="menu-frame">
+      <div class="menu-inner">
+
+        <div class="mf-top">
+          <span class="mf-glyph">✂</span>
+          <p>All cuts include a hot towel and a straight-edge neck finish.</p>
+        </div>
+
+        <div class="svc-row">
+          <div class="sr-l">
+            <p class="sr-name">Classic Cut</p>
+            <p class="sr-desc">A proper haircut the way it should be done — scissors, comb, and a clean finish. Nothing extra.</p>
+          </div>
+          <span class="sr-price">$25</span>
+        </div>
+
+        <div class="svc-row">
+          <div class="sr-l">
+            <p class="sr-name">Straight Razor Shave</p>
+            <p class="sr-desc">Hot lather, a straight razor, and a cool towel to close. The full traditional service.</p>
+          </div>
+          <span class="sr-price">$30</span>
+        </div>
+
+        <div class="svc-row">
+          <div class="sr-l">
+            <p class="sr-name">Beard Trim</p>
+            <p class="sr-desc">Shaped to your face, cleaned at the neck. Fifteen minutes and looks like it cost more.</p>
+          </div>
+          <span class="sr-price">$15</span>
+        </div>
+
+        <div class="svc-row last">
+          <div class="sr-l">
+            <p class="sr-name">Senior &amp; Kids</p>
+            <p class="sr-desc">Same quality cut, fair price. Mention it when you sit down. No ID necessary.</p>
+          </div>
+          <span class="sr-price">$20</span>
+        </div>
+
+        <div class="mf-foot">
+          <p>Cash and card both accepted &nbsp;·&nbsp; Tips always appreciated, never expected</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="svc-cta">
+      <a href="tel:+15554012962" class="btn-navy">Call to Reserve &nbsp;·&nbsp; (555) 401-2962</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Pole stripe -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== 3 · OUR STORY ===== -->
+<section class="story">
+  <div class="wrap">
+    <div class="story-inner">
+
+      <p class="eyebrow">Our Story</p>
+      <h2 class="sec-h display">In This Corner<br>Since 1962</h2>
+
+      <div class="orn" aria-hidden="true">
+        <span class="glyph">✦</span>
+      </div>
+
+      <div class="body-copy">
+        <p>
+          Heritage Barber Co. has been cutting hair in this neighborhood since the spring of 1962.
+          When George Calloway opened the doors on a Tuesday morning with two chairs, a fresh
+          barbering license, and a pot of coffee on the shelf, he had one thing in mind:
+          <strong>do good work, treat people right, and they'll be back.</strong> He was right.
+        </p>
+        <p>
+          Sixty-some years later, we're still here. Same corner, same belief. The chairs have been
+          reupholstered three times and the prices have had to go up a little, but the fundamentals
+          haven't changed: a clean cut, a close shave, and a straight answer if you ask us what
+          looks good on you.
+        </p>
+        <p>
+          Three generations of men from this neighborhood have sat in these chairs. Fathers have
+          brought in sons, those sons have brought in theirs. We know most of you by name.
+          We aim to keep it that way.
+        </p>
+      </div>
+
+      <p class="closing-line">"Walk in a stranger, walk out a regular."</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pole stripe -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== 4 · GALLERY ===== -->
+<section class="gallery paper">
+  <div class="wrap">
+
+    <div class="sec-head">
+      <p class="eyebrow">The Shop</p>
+      <h2 class="sec-h display">A Look Inside</h2>
+    </div>
+
+    <div class="photo-grid">
+      <div class="gph">
+        <span class="gph-icon">✦</span>
+        <span class="gph-label">Photo</span>
+        <span class="gph-sub">Shop Interior</span>
+      </div>
+      <div class="gph">
+        <span class="gph-icon">✦</span>
+        <span class="gph-label">Photo</span>
+        <span class="gph-sub">The Chair</span>
+      </div>
+      <div class="gph">
+        <span class="gph-icon">✦</span>
+        <span class="gph-label">Photo</span>
+        <span class="gph-sub">Barber at Work</span>
+      </div>
+      <div class="gph">
+        <span class="gph-icon">✦</span>
+        <span class="gph-label">Photo</span>
+        <span class="gph-sub">Shop Front</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Pole stripe -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== 5 · HOURS & LOCATION ===== -->
+<section class="visit" id="visit">
+  <div class="wrap">
+
+    <div class="sec-head">
+      <p class="eyebrow">Visit Us</p>
+      <h2 class="sec-h display">Hours &amp; Location</h2>
+    </div>
+
+    <div class="visit-grid">
+
+      <!-- Hours -->
+      <div>
+        <span class="blk-lbl">Shop Hours</span>
+        <table class="htbl">
+          <tr><td>Monday – Friday</td><td>8:00 AM – 6:30 PM</td></tr>
+          <tr><td>Saturday</td><td>8:00 AM – 4:00 PM</td></tr>
+          <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
+        </table>
+        <p class="hours-note">Last cut taken 30 minutes before close.</p>
+      </div>
+
+      <!-- Contact / Address -->
+      <div class="contact-blk">
+        <span class="blk-lbl">Find Us</span>
+        <p class="addr">
+          142 Main Street<br>
+          [Your Town], [State] [ZIP]<br><br>
+          Street parking on Main.<br>Bus line stops at the corner.
+        </p>
+        <a class="big-phone display" href="tel:+15554012962">(555) 401-2962</a>
+        <span class="walk-badge">✦ &nbsp; Walk-ins always welcome</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Final pole stripe before footer -->
+<div class="pole" aria-hidden="true"></div>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <p class="f-name display">Heritage Barber Co.</p>
+    <p class="f-sub">Established 1962 &nbsp;·&nbsp; Traditional Barbering</p>
+    <div class="f-rule"></div>
+    <div class="f-info">
+      <p>142 Main Street &nbsp;·&nbsp; [Your Town], [State]</p>
+      <p><a href="tel:+15554012962">(555) 401-2962</a></p>
+      <p style="margin-top:4px; font-style:italic;">
+        Walk-ins welcome &nbsp;·&nbsp; Mon–Sat
+      </p>
+    </div>
+    <p class="f-copy">© 2024 Heritage Barber Co. &nbsp;·&nbsp; All rights reserved</p>
+  </div>
+</footer>
+
+<!-- No JavaScript. No scroll reveals. Loads instantly. Timeless. -->
+
+</body>
+</html>
